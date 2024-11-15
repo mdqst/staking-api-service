@@ -45,7 +45,7 @@ func (s *V2Service) GetFinalityProviders(ctx context.Context, state types.Finali
 	if err != nil {
 		if db.IsNotFoundError(err) {
 			log.Ctx(ctx).Warn().Err(err).Msg("Finality providers not found")
-			return nil, "", types.NewErrorWithMsg(http.StatusNotFound, types.NotFound, "finality providers not found, please retry")
+			return nil, "", types.NewErrorWithMsg(http.StatusNotFound, types.NotFound, "finality providers not found")
 		}
 		return nil, "", types.NewErrorWithMsg(http.StatusInternalServerError, types.InternalServiceError, "failed to get finality providers")
 	}
@@ -63,7 +63,7 @@ func (s *V2Service) SearchFinalityProviders(ctx context.Context, searchQuery str
 	if err != nil {
 		if db.IsNotFoundError(err) {
 			log.Ctx(ctx).Warn().Err(err).Str("searchQuery", searchQuery).Msg("Finality providers not found")
-			return nil, "", types.NewErrorWithMsg(http.StatusNotFound, types.NotFound, "finality providers not found, please retry")
+			return nil, "", types.NewErrorWithMsg(http.StatusNotFound, types.NotFound, "finality providers not found")
 		}
 		return nil, "", types.NewErrorWithMsg(http.StatusInternalServerError, types.InternalServiceError, "failed to search finality providers")
 	}

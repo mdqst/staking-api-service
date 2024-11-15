@@ -37,7 +37,7 @@ func (s *V2Service) GetDelegation(ctx context.Context, stakingTxHashHex string) 
 	if err != nil {
 		if db.IsNotFoundError(err) {
 			log.Ctx(ctx).Warn().Err(err).Str("stakingTxHashHex", stakingTxHashHex).Msg("Staking delegation not found")
-			return nil, types.NewErrorWithMsg(http.StatusNotFound, types.NotFound, "staking delegation not found, please retry")
+			return nil, types.NewErrorWithMsg(http.StatusNotFound, types.NotFound, "staking delegation not found")
 		}
 		return nil, types.NewErrorWithMsg(http.StatusInternalServerError, types.InternalServiceError, "failed to get staker delegation")
 	}
@@ -67,7 +67,7 @@ func (s *V2Service) GetDelegations(ctx context.Context, stakerPkHex string, pagi
 	if err != nil {
 		if db.IsNotFoundError(err) {
 			log.Ctx(ctx).Warn().Err(err).Str("stakingTxHashHex", stakerPkHex).Msg("Staking delegations not found")
-			return nil, "", types.NewErrorWithMsg(http.StatusNotFound, types.NotFound, "staking delegation not found, please retry")
+			return nil, "", types.NewErrorWithMsg(http.StatusNotFound, types.NotFound, "staking delegation not found")
 		}
 		return nil, "", types.NewErrorWithMsg(http.StatusInternalServerError, types.InternalServiceError, "failed to get staker delegations")
 	}
